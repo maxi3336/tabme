@@ -727,7 +727,6 @@ body.dark-theme .searched {
 .folder-items-box {
     position: relative;
     flex-grow: 1;
-    padding-bottom: 40px;
 }
 
 .folder.two-column {

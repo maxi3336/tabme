@@ -991,7 +991,7 @@ body.dark-theme .searched {
     border: 0;
     padding: 10px 7px;
     margin: -6px 0;
-    margin-left: 4px;
+    margin-left: auto;
     appearance: none;
     background-color: transparent;
     border: none;

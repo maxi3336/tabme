@@ -209,6 +209,7 @@ body.dark-theme .searched {
 /* Sidebar styles */
 .collapsible-sidebar .app-sidebar {
     position: absolute;
+    bottom: 0;
     width: 360px;
     z-index: 2;
     border-radius: 0 8px 8px 0;
@@ -218,10 +219,6 @@ body.dark-theme .searched {
 
 .bookmarks-box {
     flex-grow: 1;
-}
-
-.collapsible-sidebar .bookmarks-box {
-    padding-left: 24px;
 }
 
 .app-sidebar {
@@ -236,12 +233,13 @@ body.dark-theme .searched {
     overflow-y: auto;
     overflow-x: hidden;
     user-select: none;
-    transition: width 100ms;
-    transition-delay: 100ms;
+    transition: all 500ms ease;
 }
 
 .app-sidebar.collapsed {
+    max-height: 48px;
     width: 48px;
+
 
     &::-webkit-scrollbar {
         width: 0;
@@ -249,10 +247,10 @@ body.dark-theme .searched {
     }
 }
 
-.app-sidebar .inbox-item__text {
+/* .app-sidebar .inbox-item__text {
     transition: opacity 50ms;
     transition-delay: 100ms;
-}
+} */
 
 .app-sidebar.collapsed .inbox-item__text {
     opacity: 0;
@@ -270,8 +268,8 @@ body.dark-theme .searched {
         font-size: 16px;
         vertical-align: middle;
         white-space: nowrap;
-        transition: opacity 50ms;
-        transition-delay: 100ms;
+        /* transition: opacity 50ms;
+        transition-delay: 100ms; */
         font-weight: 600;
     }
 
@@ -477,16 +475,23 @@ body.dark-theme .searched {
 
 /* Bookmarks styles */
 .bookmarks {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 48px;
+
     position: relative;
-    padding-left: 20px;
+    padding: 32px 80px;
     flex-grow: 1;
     height: calc(100% - 68px); /* 68px is height of .bookmarks-menu */
     overflow-y: auto;
-    display: flex;
-    flex-wrap: wrap;
     align-content: flex-start;
-    padding-bottom: 150px;
     box-sizing: border-box;
+}
+
+@media (max-width: 1800px) {
+    .bookmarks {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 .bookmarks-menu {
@@ -671,8 +676,6 @@ body.dark-theme .searched {
 .folder {
     display: flex;
     flex-direction: column;
-    width: 340px;
-    padding: 8px 28px;
     user-select: none;
 }
 
@@ -685,7 +688,6 @@ body.dark-theme .searched {
 
 .folder h2 {
     color: rgb(5, 0, 56); /** var(--main-text-color); */
-    margin-left: 24px;
     padding: 6px 8px;
     border-radius: 8px;
     position: relative;
@@ -738,17 +740,29 @@ body.dark-theme .searched {
     grid-auto-flow: row;
 }
 
-.folder.folder--new h2 {
-    background-color: var(--input-background-color);
-    color: var(--colors-gray-600);
-    cursor: pointer;
+.folder--new {
+    position: absolute;
+    bottom: 0;
+    right: 80px;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+    background-color: #4900ad;
+    color: white;
+
+    font-size: 32px;
+    line-height: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.folder.folder--new h2 span {
-    display: inline-block;
-    vertical-align: top;
-    font-weight: 200;
-    margin-left: 76px;
+.folder--new:hover {
+    opacity: 0.8;
+    cursor: pointer;
 }
 
 .draggable-folder {
@@ -930,7 +944,7 @@ body.dark-theme .searched {
     text-decoration: none;
     color: var(--main-text-color);
     flex-grow: 1;
-    max-width: 288px;
+    max-width: 320px;
     vertical-align: top;
     font-size: 14px;
     overflow: hidden;

@@ -152,60 +152,6 @@ export function Bookmarks(props: {
 
   return (
     <div className="bookmarks-box">
-      <div className={CL("bookmarks-menu", { "bookmarks-menu--scrolled": isScrolled })}>
-        <div style={{ display: "flex" }}>
-          <IconFind className="search-icon"/>
-          <input
-            tabIndex={1}
-            className="search"
-            type="text"
-            placeholder="Search in Tabme"
-            value={props.appState.search}
-            onChange={onSearchChange}
-            onKeyDown={handleSearchKeyDown}
-          />
-        </div>
-        {
-          props.appState.search !== ""
-            ? <button tabIndex={1} className={"btn__clear-search"} onClick={onClearSearch}>✕</button>
-            : null
-        }
-        {/*<div className="toolbar-buttons" style={{marginRight: "auto"}}>*/}
-        {/*  <button className={"btn__setting"}>+ folder</button>*/}
-        {/*  <button className={"btn__setting"}>+ note </button>*/}
-        {/*</div>*/}
-
-        <div className="menu-buttons">
-          {
-            props.appState.betaMode ?
-              <>
-                <button className={"btn__setting"} onClick={onLogout}>Logout</button>
-              </>
-              : null
-          }
-
-          <button className={`btn__icon ${helpMenuVisibility ? "active" : ""}`} onClick={onToggleHelpSettings}>
-            <IconHelp/>
-          </button>
-          <button className={`btn__icon ${settingsMenuVisibility ? "active" : ""}`} onClick={onToggleSettings}>
-            <IconSettings/>
-          </button>
-          {helpMenuVisibility ? (
-            <DropdownMenu onClose={() => {setHelpMenuVisibility(false)}} className="dropdown-menu--settings dropdown-menu--help" topOffset={30} noSmartPositioning={true}>
-              <HelpOptions appState={props.appState} onShortcutsModal={() => setShortcutsModalOpen(true)}/>
-            </DropdownMenu>
-          ) : null}
-
-          {settingsMenuVisibility ? (
-            <DropdownMenu onClose={() => {setSettingsMenuVisibility(false)}} className="dropdown-menu--settings" topOffset={30} noSmartPositioning={true}>
-              <SettingsOptions appState={props.appState} onOverrideNewTabMenu={() => setOverrideModalOpen(true)}/>
-            </DropdownMenu>
-          ) : null}
-
-        </div>
-        <OverrideModal isOverrideModalOpen={isOverrideModalOpen} setOverrideModalOpen={setOverrideModalOpen}/>
-        <ShortcutsModal isShortcutsModalOpen={isShortcutsModalOpen} setShortcutsModalOpen={setShortcutsModalOpen}/>
-      </div>
       <div className="bookmarks"
            ref={bookmarksRef}
            onMouseDown={onMouseDown}
@@ -229,9 +175,8 @@ export function Bookmarks(props: {
         {
           props.appState.search === ""
             ? (
-              <div className="folder folder--new">
-                <h2 onClick={onCreateFolder}>New folder <span>+ Click to add</span></h2>
-                <div className="folder-items-box" data-folder-id="-1"/>
+              <div className="folder folder--new" onClick={onCreateFolder}>
+                +
               </div>
             )
             : null

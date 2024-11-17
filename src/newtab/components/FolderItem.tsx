@@ -90,12 +90,6 @@ export const FolderItem = React.memo((p: {
           onClose={() => setShowMenu(false)}/>
         : null
       }
-      <button className="folder-item__menu"
-              onContextMenu={onContextMenu}
-              onClick={() => setShowMenu(!showMenu)}>
-        <IconMore/>
-      </button>
-
       <a className={
         CL("folder-item__inner draggable-item", {
           "section": p.item.isSection,

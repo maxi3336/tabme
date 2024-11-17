@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "short_name": "Tabme",
-  "name": "Tabme — Organize Tabs and Bookmarks",
+  "short_name": "TabMine",
+  "name": "TabMine — Organize Tabs and Bookmarks",
   "description": "Boost productivity — Turn chaotic browsing into a structured experience.",
   "version": "1.26.0",
   "author": "pltnkv0+tabme@gmail.com",

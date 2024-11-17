@@ -89,7 +89,7 @@ export function DropdownMenu(p: {
     <div
       className={"dropdown-menu " + (p.className || "")}
       style={{
-        left: p.leftOffset ? `${p.leftOffset}px` : "auto",
+        right: 0,
         width: p.width ? `${p.width}px` : "auto"
       }}
       ref={formEl}

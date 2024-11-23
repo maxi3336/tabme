@@ -129,8 +129,8 @@ export function Bookmarks(props: {
     setHelpMenuVisibility(!helpMenuVisibility)
   }
 
-  function onToggleSettings() {
-    setSettingsMenuVisibility(!settingsMenuVisibility)
+  function onToggleSettings(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    setSettingsMenuVisibility(prev => !prev)
   }
 
   function onSearchChange(event: React.ChangeEvent) {
@@ -152,37 +152,19 @@ export function Bookmarks(props: {
 
   return (
     <div className="bookmarks-box">
-      <div style={{ display: "flex" }}>
-        <div className="menu-buttons">
-          {
-            props.appState.betaMode ?
-              <>
-                <button className={"btn__setting"} onClick={onLogout}>Logout</button>
-              </>
-              : null
-          }
+      <div>
+        <button id="settings_btn" className={`btn__icon ${settingsMenuVisibility ? "active" : ""}`} onClick={onToggleSettings}>
+          <IconSettings id="settings_icon" />
+        </button>
 
-          <button className={`btn__icon ${helpMenuVisibility ? "active" : ""}`} onClick={onToggleHelpSettings}>
-            <IconHelp />
-          </button>
-          <button className={`btn__icon ${settingsMenuVisibility ? "active" : ""}`} onClick={onToggleSettings}>
-            <IconSettings />
-          </button>
-          {helpMenuVisibility ? (
-            <DropdownMenu onClose={() => { setHelpMenuVisibility(false) }} className="dropdown-menu--settings dropdown-menu--help" topOffset={30} noSmartPositioning={true}>
-              <HelpOptions appState={props.appState} onShortcutsModal={() => setShortcutsModalOpen(true)} />
-            </DropdownMenu>
-          ) : null}
 
-          {settingsMenuVisibility ? (
-            <DropdownMenu onClose={() => { setSettingsMenuVisibility(false) }} className="dropdown-menu--settings" topOffset={30} noSmartPositioning={true}>
-              <SettingsOptions appState={props.appState} onOverrideNewTabMenu={() => setOverrideModalOpen(true)} />
-            </DropdownMenu>
-          ) : null}
+        {settingsMenuVisibility ? (
+          <DropdownMenu onClose={() => { setSettingsMenuVisibility(false) }} className="dropdown-menu--settings" topOffset={48} noSmartPositioning={true}>
+            <SettingsOptions appState={props.appState} onOverrideNewTabMenu={() => setOverrideModalOpen(true)} />
+          </DropdownMenu>
+        ) : null}
 
-        </div>
         <OverrideModal isOverrideModalOpen={isOverrideModalOpen} setOverrideModalOpen={setOverrideModalOpen} />
-        <ShortcutsModal isShortcutsModalOpen={isShortcutsModalOpen} setShortcutsModalOpen={setShortcutsModalOpen} />
       </div>
 
       <div className="bookmarks"

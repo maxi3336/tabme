@@ -218,6 +218,7 @@ body.dark-theme .searched {
 }
 
 .bookmarks-box {
+    position: relative;
     flex-grow: 1;
 }
 
@@ -479,7 +480,6 @@ body.dark-theme .searched {
     grid-template-columns: repeat(5, 1fr);
     gap: 48px;
 
-    position: relative;
     padding: 32px 80px;
     flex-grow: 1;
     height: calc(100% - 68px); /* 68px is height of .bookmarks-menu */
@@ -508,11 +508,17 @@ body.dark-theme .searched {
 }
 
 .dropdown-menu--settings {
-    right: 12px;
+    right: 26px;
 
     &.dropdown-menu--help {
         right: 48px;
     }
+}
+
+#settings_btn {
+    position: absolute;
+    right: 16px;
+    top: 16px;
 }
 
 .btn__icon {
@@ -741,8 +747,8 @@ body.dark-theme .searched {
 
 .folder--new {
     position: absolute;
-    bottom: 0;
-    right: 80px;
+    bottom: 16px;
+    right: 32px;
 
     width: 48px;
     height: 48px;
@@ -1061,7 +1067,6 @@ body.dragging * {
 .dropdown-menu {
     position: absolute;
     min-width: 140px;
-    margin-top: 24px;
     background-color: var(--popup-background-color);
     box-shadow: 0 4px 12px 0 rgba(30, 30, 30, 0.2);
     border-radius: 8px;

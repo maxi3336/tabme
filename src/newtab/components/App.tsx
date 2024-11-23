@@ -39,7 +39,7 @@ export function App() {
         dispatch({ type: Action.UpdateAppState, newState: { appLoaded: true } })
       }
 
-      chrome.history.search({ text: "", maxResults: 10000, startTime }, function(data) {
+      chrome.history.search({ text: "", maxResults: 10000, startTime }, function (data) {
         // logging top 3 visited sides
         // console.log(data.slice(0, 3))
         const historyItems = filterIrrelevantHistory(data)
@@ -71,11 +71,11 @@ export function App() {
     chrome.tabs.onRemoved.addListener(() => updateTabsAndHistory()) // can do it more efficiently (don't update history)
     chrome.tabs.onUpdated.addListener(onTabUpdated)
 
-    chrome.runtime.sendMessage({ type: "get-last-active-tabs" }, function(response) {
+    chrome.runtime.sendMessage({ type: "get-last-active-tabs" }, function (response) {
       dispatch({ type: Action.UpdateAppState, newState: { lastActiveTabIds: response.tabs } })
     })
 
-    getBC().onmessage = function(ev: MessageEvent) {
+    getBC().onmessage = function (ev: MessageEvent) {
       console.log(ev)
       if (ev.data?.type === "folders-updated") {
         getStateFromLS((res) => {
@@ -150,18 +150,28 @@ export function App() {
     }
   }, [appState.apiCommandId])
 
+  useEffect(() => {
+    const isSystemDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+    const isDarkButLight = appState.colorTheme === 'light' && isSystemDark;
+    const isLightButDark = appState.colorTheme === 'dark' && !isSystemDark;
+
+    if (isDarkButLight || isLightButDark) {
+      dispatch({ type: Action.ToggleDarkMode });
+    }
+  }, [])
+
   return (
     <DispatchContext.Provider value={dispatch}>
       {appState.appLoaded ?
         <div className={"app " + (appState.sidebarCollapsed ? "collapsible-sidebar" : "")}>
-          <Notification notification={appState.notification}/>
+          <Notification notification={appState.notification} />
           {
             appState.page === "import"
-              ? <Welcome appState={appState}/>
+              ? <Welcome appState={appState} />
               : <>
-                <Sidebar appState={appState}/>
-                <Bookmarks appState={appState}/>
-                <KeyboardManager search={appState.search}/>
+                <Sidebar appState={appState} />
+                <Bookmarks appState={appState} />
+                <KeyboardManager search={appState.search} />
               </>
           }
         </div>

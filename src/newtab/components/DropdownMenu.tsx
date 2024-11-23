@@ -14,7 +14,9 @@ export function DropdownMenu(p: {
 
   useEffect(() => {
     function onMouse(e: MouseEvent) {
-      if (formEl.current && !formEl.current.contains(e.target as HTMLElement)) {
+      const target = e.target as HTMLElement;
+
+      if (target.id !== "settings_icon" && target.id !== "settings_btn" && formEl.current && !formEl.current.contains(target)) {
         p.onClose()
       }
     }
@@ -89,7 +91,6 @@ export function DropdownMenu(p: {
     <div
       className={"dropdown-menu " + (p.className || "")}
       style={{
-        right: 0,
         width: p.width ? `${p.width}px` : "auto"
       }}
       ref={formEl}
